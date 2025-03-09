@@ -1,25 +1,51 @@
-# PayMyGas React Component
+<p align="center">
+  <img src="./public/demo.png" alt="Pay My Gas" width="300" />
+</p>
 
-A reusable React component for crypto builders and content creators to receive donations. The component provides a clean, professional UI for users to send crypto donations, referencing the "gas" metaphor common in crypto communities.
+<h1 align="center">PayMyGas</h1>
 
-## Features
+<p align="center">
+  <strong>A simple, elegant way for builders and creators to accept crypto donations</strong>
+</p>
 
-- **Simple Integration**: Easy-to-use React component that can be installed via npm/yarn
-- **Customizable UI**: Fully customizable text and styling
-- **Blockchain Support**: Built on Base by default, configurable for other EVM-compatible chains
-- **Wallet Integration**: Seamless wallet connections via RainbowKit
-- **Multiple Donation Options**: Preset donation amounts and custom input options
-- **Modern Design**: Built with TailwindCSS
+<p align="center">
+  <a href="https://www.npmjs.com/package/paymygas"><img src="https://img.shields.io/npm/v/paymygas.svg?style=flat-square" alt="npm version"></a>
+  <a href="https://www.npmjs.com/package/paymygas"><img src="https://img.shields.io/npm/dm/paymygas.svg?style=flat-square" alt="npm downloads"></a>
+  <a href="https://github.com/oztamir/paymygas/blob/main/LICENSE"><img src="https://img.shields.io/github/license/oztamir/paymygas?style=flat-square" alt="license"></a>
+</p>
 
-## Installation
+---
+
+## 🚀 Overview
+
+**PayMyGas** is a powerful, customizable React component that enables Web3 developers and content creators to easily accept crypto donations. Built on the Base blockchain (with support for other EVM chains), PayMyGas offers a frictionless experience for both developers and end-users.
+
+With crypto donations themed around "paying for gas," this component adds a playful yet practical way to support your favorite projects and creators.
+
+## ✨ Features
+
+- 🔌 **Plug and Play**: Simple integration into React applications
+- 🎨 **Fully Customizable**: Style it to match your brand
+- 🔗 **Multi-Chain Support**: Works with Base by default, configurable for other EVM chains
+- 👛 **RainbowKit Integration**: Connect to popular wallets seamlessly
+- 💸 **Flexible Donations**: Preset amounts or custom input
+- 🎭 **Gas-Themed UX**: Engaging metaphor that resonates with crypto users
+- 📱 **Responsive Design**: Works beautifully on all devices
+
+## 📦 Installation
 
 ```bash
+# Using npm
 npm install paymygas
-# or
+
+# Using yarn
 yarn add paymygas
+
+# Using pnpm
+pnpm add paymygas
 ```
 
-## Usage
+## 🔧 Quick Start
 
 ```jsx
 import { PayMyGas } from "paymygas";
@@ -51,7 +77,6 @@ function App() {
           <PayMyGas
             recipientAddress="0x1234abcd..."
             buttonText="⛽️ Pay My Gas"
-            buttonClassName="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-xl"
             modalTitle="Support My Work"
             modalDescription="Choose an amount to cover some gas and support ongoing development!"
           />
@@ -62,7 +87,7 @@ function App() {
 }
 ```
 
-## Props
+## 🛠️ Configuration Options
 
 | Prop             | Type   | Description                                            | Required |
 | ---------------- | ------ | ------------------------------------------------------ | -------- |
@@ -74,18 +99,16 @@ function App() {
 | modalDescription | string | Brief description/instructions within the modal        | ❌       |
 | donationOptions  | object | Custom donation options to override defaults           | ❌       |
 
-## Donation Options
+## 🎁 Donation Options
 
-The component provides four default donation options:
+By default, PayMyGas provides these playful donation options:
 
-1. **Spare Change** (🪙 $5 USDC): For sending a small tip
-2. **Half Tank** (⛽ $10 USDC): For sending a moderate tip
-3. **Full Tank** (🚀 $20 USDC): For generous support
-4. **Custom** (⚙️): User-specified crypto amount (USDC or native token)
+- **Spare Change** 🪙 ($5 USDC): For sending a small tip
+- **Half Tank** ⛽ ($10 USDC): For sending a moderate donation
+- **Full Tank** 🚀 ($20 USDC): For generous support
+- **Custom** ⚙️: User-specified amount (USDC or native token)
 
-### Custom Donation Options
-
-You can customize the donation options by passing your own `donationOptions` prop:
+### Customizing Options
 
 ```jsx
 import { PayMyGas } from "paymygas";
@@ -103,8 +126,7 @@ const customOptions = {
     description: "Buy me lunch",
     emoji: "🍔",
   },
-  // You can override just the options you want
-  // Unspecified options will use the defaults
+  // Only specify the options you want to customize
 };
 
 function App() {
@@ -117,19 +139,17 @@ function App() {
 }
 ```
 
-## Wallet Support
+## 🔒 Supported Wallets
 
-The component uses RainbowKit to connect to popular wallets including:
+PayMyGas leverages RainbowKit to connect to all major wallets:
 
 - MetaMask
 - Coinbase Wallet
 - Rainbow
 - WalletConnect
-- and many more
+- And many more!
 
-## Development
-
-To run the demo project locally:
+## 💻 Development
 
 ```bash
 # Clone the repository
@@ -141,20 +161,31 @@ npm install
 
 # Start the development server
 npm run dev
-```
 
-## Building the Component
-
-To build the component for production:
-
-```bash
+# Build for production
 npm run build
 ```
 
-## License
+## 📚 Examples
 
-MIT
+Visit [our examples page](https://paymygas.xyz/examples) to see PayMyGas in action across various applications.
 
-## Contributing
+## 📝 License
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+[MIT](LICENSE)
+
+## 🤝 Contributing
+
+We welcome contributions! Please feel free to submit a Pull Request.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/amazing-feature`)
+3. Commit your Changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the Branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+---
+
+<p align="center">
+  Made with ❤️ by <a href="https://oztamir.com">Oz</a>
+</p>
