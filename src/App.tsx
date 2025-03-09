@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import HomePage from "./components/HomePage";
 import ExamplesPage from "./components/ExamplesPage";
+import DocsPage from "./components/DocsPage";
 
 // Create a new query client for React Query
 const queryClient = new QueryClient();
@@ -32,6 +33,7 @@ function App() {
               <Route path="/" element={<Layout />}>
                 <Route index element={<HomePage />} />
                 <Route path="examples" element={<ExamplesPage />} />
+                <Route path="docs" element={<DocsPage />} />
               </Route>
             </Routes>
           </BrowserRouter>

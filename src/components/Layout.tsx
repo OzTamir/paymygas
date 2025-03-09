@@ -24,6 +24,9 @@ const Layout = () => {
             <NavLink to="/examples" current={location.pathname}>
               Examples
             </NavLink>
+            <NavLink to="/docs" current={location.pathname}>
+              Docs
+            </NavLink>
             <NavLink
               to="https://github.com/oztamir/paymygas"
               current={location.pathname}
