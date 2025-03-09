@@ -11,14 +11,15 @@
   ],
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "require": "./dist/index.cjs",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/index.cjs"
     }
   },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "build:app": "vite build --mode app",
     "lint": "eslint .",
     "preview": "vite preview",
     "prepare": "npm run build"
