@@ -6,7 +6,7 @@ const DocsPage = () => {
   const [activeTab, setActiveTab] = useState<string>("getting-started");
 
   // Demo wallet address for examples
-  const DEMO_WALLET_ADDRESS = "0x1234567890123456789012345678901234567890";
+  const DEMO_WALLET_ADDRESS = "0xc386788e19e53d7237eafa955386567d50a4dc60";
 
   // Function to determine the active class for tabs
   const isActive = (tabId: string) => {

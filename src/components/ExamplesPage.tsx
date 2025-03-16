@@ -2,7 +2,7 @@ import { useState } from "react";
 import { PayMyGas } from "./PayMyGas";
 
 // Demo wallet address (replace with your own for testing)
-const DEMO_WALLET_ADDRESS = "0x1234567890123456789012345678901234567890";
+const DEMO_WALLET_ADDRESS = "0xc386788e19e53d7237eafa955386567d50a4dc60";
 
 // Example custom donation options
 const COFFEE_LUNCH_OPTIONS = {
