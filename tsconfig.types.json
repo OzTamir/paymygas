@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "declaration": true,
+    "declarationDir": "./dist",
+    "outDir": "./dist",
+    "emitDeclarationOnly": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "allowImportingTsExtensions": true
+  },
+  "include": [
+    "src/lib/**/*.ts", 
+    "src/lib/**/*.tsx",
+    "src/components/PayMyGas/**/*.ts", 
+    "src/components/PayMyGas/**/*.tsx"
+  ],
+  "exclude": ["node_modules", "**/*.spec.ts", "**/*.test.ts", "src/App.tsx", "src/main.tsx"]
+} 

@@ -18,7 +18,11 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "clean": "rm -rf dist",
+    "clean:assets": "find dist -type f -name \"*.png\" -o -name \"*.ico\" -o -name \"*.svg\" | xargs rm -f 2>/dev/null || true",
+    "build:types": "npm run clean && tsc -p tsconfig.types.json",
+    "build:js": "vite build",
+    "build": "npm run build:types && npm run build:js && npm run clean:assets",
     "build:app": "vite build --mode app",
     "lint": "eslint .",
     "preview": "vite preview",

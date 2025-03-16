@@ -11,13 +11,14 @@ export default defineConfig(({ mode }) => {
     plugins: [
       react(),
       tailwindcss(),
-      !isApp && dts({
-        include: ['src'],
+      dts({
+        include: isApp ? ['src/**/*.ts', 'src/**/*.tsx'] : ['src/lib/**/*.ts', 'src/lib/**/*.tsx', 'src/components/PayMyGas/**/*.ts', 'src/components/PayMyGas/**/*.tsx'],
         entryRoot: 'src',
-        outDir: 'dist'
+        outDir: isApp ? 'dist-app' : 'dist'
       })
-    ].filter(Boolean),
+    ],
     build: {
+      emptyOutDir: false,
       ...(isApp ? {
         outDir: 'dist-app',
       } : {
@@ -27,6 +28,7 @@ export default defineConfig(({ mode }) => {
           fileName: (format) => `index.${format === 'es' ? 'js' : format}`,
           formats: ['es', 'cjs']
         },
+        copyPublicDir: false,
         rollupOptions: {
           external: [
             'react',
