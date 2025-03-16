@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./public/demo.png" alt="Pay My Gas" width="300" />
+  <img src="https://paymygas.xyz/demo.png" alt="Pay My Gas" width="300" />
 </p>
 
 <h1 align="center">PayMyGas</h1>
