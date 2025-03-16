@@ -62,6 +62,27 @@ const CONTENT_CREATOR_OPTIONS = {
   },
 };
 
+// Custom button example component
+const CustomButton = () => (
+  <button className="flex items-center justify-center gap-2 bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg transition-all duration-200 transform hover:scale-105">
+    <span className="text-xl">🚀</span>
+    <span>Power My Project</span>
+  </button>
+);
+
+const CustomImageButton = () => (
+  <div className="relative group cursor-pointer transition-all duration-200 transform hover:scale-105">
+    <div className="w-36 h-36 rounded-full bg-gradient-to-r from-pink-500 to-orange-500 p-1">
+      <div className="w-full h-full bg-black rounded-full flex items-center justify-center">
+        <div className="text-6xl">🎁</div>
+      </div>
+    </div>
+    <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-white text-black text-xs font-bold py-1 px-5 rounded-full shadow-lg text-center">
+      Support Me!
+    </div>
+  </div>
+);
+
 const ExamplesPage = () => {
   const [selectedTab, setSelectedTab] = useState<string>("default");
 
@@ -90,6 +111,8 @@ const ExamplesPage = () => {
         return "❤️ Support My Content";
       case "custom":
         return "🎨 Custom Design";
+      case "custom-button":
+        return "⛽ Pay My Gas"; // Not used with custom button
       default:
         return "⛽ Pay My Gas";
     }
@@ -106,6 +129,8 @@ const ExamplesPage = () => {
         return "Support My Content";
       case "custom":
         return "Support This Project";
+      case "custom-button":
+        return "Power My Project";
       default:
         return "Support My Work";
     }
@@ -165,6 +190,47 @@ const ExamplesPage = () => {
   modalTitle="Support This Project"
   modalDescription="Choose how much you'd like to contribute!"
 />`;
+      case "custom-button":
+        return `// Define your custom button component
+const CustomButton = () => (
+  <button
+    className="flex items-center justify-center gap-2 bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg transition-all duration-200 transform hover:scale-105"
+  >
+    <span className="text-xl">🚀</span>
+    <span>Power My Project</span>
+  </button>
+);
+
+// Use the custom button with PayMyGas
+// Note: Your button will be wrapped in a div with the onClick handler
+<PayMyGas
+  recipientAddress="${DEMO_WALLET_ADDRESS}"
+  modalTitle="Power My Project"
+  modalDescription="Your support helps this project reach new heights!"
+  customButton={<CustomButton />}
+/>`;
+      case "custom-image":
+        return `// Define your custom image button component
+const CustomImageButton = () => (
+  <div className="relative group cursor-pointer transition-all duration-200 transform hover:scale-105">
+    <div className="w-36 h-36 rounded-full bg-gradient-to-r from-pink-500 to-orange-500 p-1">
+      <div className="w-full h-full bg-black rounded-full flex items-center justify-center">
+        <div className="text-6xl">🎁</div>
+      </div>
+    </div>
+    <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-white text-black text-xs font-bold py-1 px-5 rounded-full shadow-lg text-center">
+      Support Me!
+    </div>
+  </div>
+);
+
+// Use the custom image button with PayMyGas
+<PayMyGas
+  recipientAddress="${DEMO_WALLET_ADDRESS}"
+  modalTitle="Join My Supporters"
+  modalDescription="Your generosity fuels my creativity!"
+  customButton={<CustomImageButton />}
+/>`;
       default:
         return `<PayMyGas
   recipientAddress="${DEMO_WALLET_ADDRESS}"
@@ -172,6 +238,40 @@ const ExamplesPage = () => {
   modalTitle="Support My Work"
   modalDescription="Choose an amount to cover some gas and support ongoing development!"
 />`;
+    }
+  };
+
+  // Custom button render helper
+  const renderButton = () => {
+    if (selectedTab === "custom-button") {
+      return (
+        <PayMyGas
+          recipientAddress={DEMO_WALLET_ADDRESS}
+          modalTitle="Power My Project"
+          modalDescription="Your support helps this project reach new heights!"
+          customButton={<CustomButton />}
+        />
+      );
+    } else if (selectedTab === "custom-image") {
+      return (
+        <PayMyGas
+          recipientAddress={DEMO_WALLET_ADDRESS}
+          modalTitle="Join My Supporters"
+          modalDescription="Your generosity fuels my creativity!"
+          customButton={<CustomImageButton />}
+        />
+      );
+    } else {
+      return (
+        <PayMyGas
+          recipientAddress={DEMO_WALLET_ADDRESS}
+          buttonText={getButtonText()}
+          buttonClassName={getButtonClassName()}
+          modalTitle={getModalTitle()}
+          modalDescription="Your support helps this project grow!"
+          donationOptions={getDonationOptions()}
+        />
+      );
     }
   };
 
@@ -194,6 +294,7 @@ const ExamplesPage = () => {
           { id: "membership", label: "Membership Tiers" },
           { id: "creator", label: "Content Creator" },
           { id: "custom", label: "Custom Design" },
+          { id: "custom-image", label: "Custom Button" },
         ].map((tab) => (
           <button
             key={tab.id}
@@ -221,7 +322,11 @@ const ExamplesPage = () => {
               ? "Membership Tiers"
               : selectedTab === "creator"
               ? "Content Creator"
-              : "Custom Styled Button"}
+              : selectedTab === "custom"
+              ? "Custom Styled Button"
+              : selectedTab === "custom-button"
+              ? "Custom Button Component"
+              : "Custom Image Button"}
           </h2>
           <p className="text-gray-600 dark:text-gray-300 max-w-lg mx-auto">
             {selectedTab === "default"
@@ -232,20 +337,15 @@ const ExamplesPage = () => {
               ? "Great for creators offering membership tiers with different benefits."
               : selectedTab === "creator"
               ? "Ideal for content creators on YouTube, Twitch, or other platforms."
-              : "A custom-styled button with gradient colors and shadows."}
+              : selectedTab === "custom"
+              ? "A custom-styled button with gradient colors and shadows."
+              : selectedTab === "custom-button"
+              ? "Pass your own React component as the button to open the donation modal."
+              : "Use image-based buttons or complex UI elements as trigger buttons."}
           </p>
         </div>
 
-        <div className="flex justify-center mb-8">
-          <PayMyGas
-            recipientAddress={DEMO_WALLET_ADDRESS}
-            buttonText={getButtonText()}
-            buttonClassName={getButtonClassName()}
-            modalTitle={getModalTitle()}
-            modalDescription="Your support helps this project grow!"
-            donationOptions={getDonationOptions()}
-          />
-        </div>
+        <div className="flex justify-center mb-8">{renderButton()}</div>
 
         <div className="bg-gray-100 dark:bg-gray-900 p-4 rounded-lg overflow-x-auto">
           <pre className="text-sm text-gray-800 dark:text-gray-200">

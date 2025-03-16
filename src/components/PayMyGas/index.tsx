@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { PayMyGasButton } from "./PayMyGasButton";
 import { PayMyGasModal } from "./PayMyGasModal";
+import React from "react";
 
 // Define the donation option types
 export type DonationOption =
@@ -60,6 +61,13 @@ export interface PayMyGasProps {
    * Override default donation options with your own
    */
   donationOptions?: DonationOptions;
+
+  /**
+   * Custom button element that opens the modal
+   * When provided, buttonText and buttonClassName are ignored
+   * The onClick handler will be attached to the wrapper div
+   */
+  customButton?: React.ReactNode;
 }
 
 export const PayMyGas = ({
@@ -70,6 +78,7 @@ export const PayMyGas = ({
   modalTitle = "Support My Work",
   modalDescription = "Choose an amount to cover some gas and support ongoing development!",
   donationOptions = {}, // Default to empty object for custom donation options
+  customButton = null, // Default to null for the custom button
 }: PayMyGasProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -78,11 +87,31 @@ export const PayMyGas = ({
 
   return (
     <>
-      <PayMyGasButton
-        text={buttonText}
-        className={buttonClassName}
-        onClick={handleOpenModal}
-      />
+      {customButton ? (
+        // Wrap the custom button in a div with the onClick handler
+        <div
+          onClick={handleOpenModal}
+          className="inline-block cursor-pointer"
+          role="button"
+          tabIndex={0}
+          aria-label="Open donation modal"
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              handleOpenModal();
+              e.preventDefault();
+            }
+          }}
+        >
+          {customButton}
+        </div>
+      ) : (
+        // Render the default button
+        <PayMyGasButton
+          text={buttonText}
+          className={buttonClassName}
+          onClick={handleOpenModal}
+        />
+      )}
 
       <PayMyGasModal
         isOpen={isOpen}

@@ -496,6 +496,19 @@ const Configuration = ({ setTab }: { setTab: (tab: string) => void }) => (
               Custom donation options (see Customization)
             </td>
           </tr>
+          <tr>
+            <td className="px-4 py-3 text-sm text-white font-medium">
+              customButton
+            </td>
+            <td className="px-4 py-3 text-sm text-gray-300">
+              <code>React.ReactNode</code>
+            </td>
+            <td className="px-4 py-3 text-sm text-gray-300">null</td>
+            <td className="px-4 py-3 text-sm text-gray-300">
+              Custom React element to use as the button (overrides buttonText
+              and buttonClassName)
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -556,6 +569,67 @@ const Customization = ({
             buttonClassName="bg-amber-600 hover:bg-amber-700 text-white font-bold py-2 px-6 rounded-full"
           />
         </div>
+      </div>
+    </div>
+
+    <div className="space-y-3 pt-6">
+      <h3 className="text-xl font-semibold text-white">
+        Custom Button Component
+      </h3>
+      <p className="text-gray-300">
+        For complete control over the button appearance, you can provide your
+        own custom React component using the <code>customButton</code> prop:
+      </p>
+      <div className="bg-gray-800 p-4 rounded-lg overflow-x-auto">
+        <pre className="text-gray-300">
+          <code>
+            {`// Define your custom button component
+const GradientButton = () => (
+  <button className="flex items-center gap-2 bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-all duration-200">
+    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+      <path d="M10 2a8 8 0 100 16 8 8 0 000-16zm0 14a6 6 0 110-12 6 6 0 010 12zm-1-5a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zm0-3a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1z" />
+    </svg>
+    <span>Support This Project</span>
+  </button>
+);
+
+// Use it with PayMyGas
+<PayMyGas
+  recipientAddress="${demoAddress}"
+  modalTitle="Support This Project"
+  customButton={<GradientButton />}
+/>`}
+          </code>
+        </pre>
+      </div>
+
+      <p className="text-gray-300 mt-4">
+        When you provide a <code>customButton</code>, the{" "}
+        <code>buttonText</code> and <code>buttonClassName</code> props are
+        ignored. The custom button will be wrapped in an accessible div with a
+        click handler that opens the donation modal.
+      </p>
+
+      <div className="bg-gray-900 rounded-lg p-6 border border-gray-800 mt-4">
+        <h4 className="text-lg font-semibold text-white mb-3">
+          Custom Button Examples
+        </h4>
+        <p className="text-gray-300 mb-4">
+          You can use the <code>customButton</code> prop for various use cases:
+        </p>
+        <ul className="space-y-2 text-gray-300 list-disc pl-6">
+          <li>Branded buttons with your logo or specific design language</li>
+          <li>Image-based buttons or icon buttons</li>
+          <li>Animated or interactive elements</li>
+          <li>Complex button layouts with multiple visual elements</li>
+          <li>Integration with existing UI component systems</li>
+        </ul>
+        <p className="text-gray-300 mt-4">
+          <strong>Note:</strong> The custom button will be wrapped in a div with
+          role="button" and appropriate accessibility attributes. Any onClick
+          handlers on your custom button component will not be triggered
+          directly.
+        </p>
       </div>
     </div>
 
@@ -699,6 +773,94 @@ function App() {
     </WagmiProvider>
   );
 }`}
+          </code>
+        </pre>
+      </div>
+    </div>
+
+    <div className="space-y-3 pt-6">
+      <h3 className="text-xl font-semibold text-white">
+        Advanced Custom Button Usage
+      </h3>
+      <p className="text-gray-300">
+        The <code>customButton</code> prop can be used for more advanced
+        scenarios, such as conditionally rendering different buttons based on
+        state or including interactive elements:
+      </p>
+      <div className="bg-gray-800 p-4 rounded-lg overflow-x-auto">
+        <pre className="text-gray-300">
+          <code>
+            {`import { useState } from "react";
+import { PayMyGas } from "paymygas";
+
+function MyComponent() {
+  const [isHighlighted, setIsHighlighted] = useState(false);
+  
+  // Custom button with animation and interactive hover state
+  const AnimatedSupportButton = () => (
+    <div 
+      className={\`relative overflow-hidden rounded-xl transition-all duration-300 \${
+        isHighlighted ? 'ring-4 ring-yellow-400' : ''
+      }\`}
+      onMouseEnter={() => setIsHighlighted(true)}
+      onMouseLeave={() => setIsHighlighted(false)}
+    >
+      <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-pink-500 opacity-75 animate-pulse"></div>
+      <button className="relative z-10 flex items-center justify-between gap-3 bg-gray-900 px-5 py-3 rounded-xl backdrop-blur-sm">
+        <div>
+          <span className="block text-white font-bold">Support the Project</span>
+          <span className="block text-gray-300 text-sm">Help us grow!</span>
+        </div>
+        <span className="text-2xl">🚀</span>
+      </button>
+    </div>
+  );
+
+  // Note: The custom button will be wrapped in a div with onClick
+  // Any onClick handlers on your custom component won't be triggered directly
+  return (
+    <PayMyGas
+      recipientAddress="0x..."
+      modalTitle="Become a Supporter"
+      modalDescription="Your support helps us continue building amazing tools!"
+      customButton={<AnimatedSupportButton />}
+    />
+  );
+}`}
+          </code>
+        </pre>
+      </div>
+
+      <p className="text-gray-300 mt-4">
+        You can also create buttons that adapt to different contexts or device
+        sizes:
+      </p>
+
+      <div className="bg-gray-800 p-4 rounded-lg overflow-x-auto">
+        <pre className="text-gray-300">
+          <code>
+            {`// Responsive button that shows different content on mobile vs desktop
+const ResponsiveButton = () => (
+  <>
+    {/* Mobile version (hidden on md screens and up) */}
+    <button className="md:hidden flex items-center justify-center p-3 bg-blue-600 rounded-full hover:bg-blue-700 transition-colors">
+      <span className="text-xl text-white">❤️</span>
+    </button>
+    
+    {/* Desktop version (hidden on screens smaller than md) */}
+    <button className="hidden md:flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg transition-colors">
+      <span>❤️</span>
+      <span>Support My Work</span>
+    </button>
+  </>
+);
+
+// Use with PayMyGas
+// The responsive button will be wrapped in a clickable div
+<PayMyGas
+  recipientAddress="0x..."
+  customButton={<ResponsiveButton />}
+/>`}
           </code>
         </pre>
       </div>
