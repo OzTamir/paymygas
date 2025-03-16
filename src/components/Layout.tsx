@@ -35,7 +35,7 @@ const Layout = () => {
               GitHub
             </NavLink>
             <Link
-              to="https://paymygas.xyz"
+              to="https://paymygas.xyz/docs"
               className="ml-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors duration-200"
             >
               Get Started
@@ -52,7 +52,7 @@ const Layout = () => {
       {/* Footer */}
       <footer className="bg-gray-900 border-t border-gray-800">
         <div className="container mx-auto px-4 py-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="flex flex-col md:flex-row justify-between gap-8 max-w-screen-lg mx-auto">
             <div>
               <h3 className="text-lg font-semibold mb-4 text-white">
                 PayMyGas
@@ -90,31 +90,16 @@ const Layout = () => {
                 </li>
               </ul>
             </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4 text-white">Connect</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li>
-                  <a
-                    href="https://twitter.com/paymygas"
-                    className="hover:text-blue-400"
-                  >
-                    Twitter
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="mailto:info@paymygas.xyz"
-                    className="hover:text-blue-400"
-                  >
-                    Contact
-                  </a>
-                </li>
-              </ul>
-            </div>
           </div>
           <div className="mt-8 pt-8 border-t border-gray-800 text-center text-gray-400">
             <p>
-              &copy; {new Date().getFullYear()} PayMyGas. All rights reserved.
+              &copy; {new Date().getFullYear()} PayMyGas. Built with ❤️ by{" "}
+              <a
+                href="https://oztamir.xyz"
+                className="hover:text-blue-400 font-bold underline"
+              >
+                oztamir.eth
+              </a>
             </p>
           </div>
         </div>
